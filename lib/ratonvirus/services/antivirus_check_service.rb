@@ -10,8 +10,9 @@ module Ratonvirus
     attr_accessor :file_path, :result
 
     def initialize(path)
-      @logger = Logger.new(STDOUT)
       @file_path = path
+      
+      @logger = Logger.new(STDOUT)
       @result = Result.new
     end
 
@@ -40,8 +41,8 @@ module Ratonvirus
     end
 
     def parse_response
-      @logger.debug { "Parsing response #{}"}
-      parsed_response = JSON.parse(@response.body).transform_keys(&:downcase)
+      @logger.debug { "Parsing response #{@response}"}
+      JSON.parse(@response.body).transform_keys(&:downcase)
     end
 
     def connection

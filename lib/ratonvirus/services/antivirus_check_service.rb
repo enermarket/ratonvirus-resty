@@ -1,4 +1,3 @@
-require 'json'
 module Ratonvirus
   class AntivirusCheckService
     class Result

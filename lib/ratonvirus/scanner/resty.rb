@@ -11,18 +11,18 @@ module Ratonvirus
 
       protected
 
-        def run_scan(path)
-          if File.file?(path)
-            result = AntivirusCheckService.new(path).call
-            if result.virus?
-              errors << :antivirus_virus_deteced
-            end
-          else
-            errors << :antivirus_file_not_found
+      def run_scan(path)
+        if File.file?(path)
+          result = AntivirusCheckService.new(path).call
+          if result.virus?
+            errors << :antivirus_virus_deteced
           end
-          rescue StandardError
-            errors << :antivirus_client_error
+        else
+          errors << :antivirus_file_not_found
         end
+        rescue StandardError
+          errors << :antivirus_client_error
+      end
     end
   end
 end

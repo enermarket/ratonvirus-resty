@@ -7,11 +7,12 @@ module Ratonvirus
         parsed_response.any? && parsed_response['status'] == 'FOUND'
       end
     end
+
     attr_accessor :file_path, :result
 
     def initialize(path)
       @file_path = path
-      
+
       @logger = Logger.new(STDOUT)
       @result = Result.new
     end
@@ -54,7 +55,7 @@ module Ratonvirus
     end
 
     def initialize_connection
-      Faraday.new(url:  base_url) do |f|
+      Faraday.new(base_url, proxy: proxy) do |f|
         f.request :url_encoded
         f.request :multipart
         f.request :basic_auth, Ratonvirus::Resty::Configuration.username, Ratonvirus::Resty::Configuration.password if request_use_basic_auth?
@@ -80,6 +81,10 @@ module Ratonvirus
 
     def request_use_basic_auth?
       Ratonvirus::Resty::Configuration.username && Ratonvirus::Resty::Configuration.password
+    end
+
+    def proxy
+      Ratonvirus::Resty::Configuration.proxy_url
     end
   end
 end

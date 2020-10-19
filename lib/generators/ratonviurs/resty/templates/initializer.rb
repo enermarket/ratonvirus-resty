@@ -3,7 +3,7 @@ Ratonvirus::Resty.configure do |config|
   #
   # default: config.base_url = ENV.fetch('RESTY_SERVICE_URL') { 'http://localhost:9000/scan' }
   #
-  config.base_url = ENV.fetch('RESTY_SERVICE_URL', 'http://localhost:9000/scan')
+  config.service_url = ENV.fetch('RESTY_SERVICE_URL', 'http://localhost:9000/scan')
 
   # Optional sets the username for api requests
   #

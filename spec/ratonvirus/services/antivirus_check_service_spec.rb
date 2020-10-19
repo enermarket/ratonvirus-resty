@@ -33,5 +33,20 @@ RSpec.describe Ratonvirus::AntivirusCheckService do
         expect(scan_response.virus?).to be_truthy
       end
     end
+
+    describe 'antivirus scan without a file' do
+      before(:each) do
+        stub_request(:post, "http://localhost:9000/scan").
+        to_return(status: 501, body: '{"Status": "ERROR", "Description": "Unknown Request"}', headers: {})
+      end
+
+      after(:each) { WebMock.reset! }
+
+      it 'return true for virus check' do
+        expect(scan_response.parsed_response).to be_kind_of(Hash)
+        expect(scan_response).to respond_to(:virus?)
+        expect(scan_response.virus?).to be_truthy
+      end
+    end
   end
 end

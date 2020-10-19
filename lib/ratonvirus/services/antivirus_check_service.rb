@@ -4,7 +4,7 @@ module Ratonvirus
       attr_accessor :parsed_response
 
       def virus?
-        parsed_response.any? && parsed_response['status'] == 'FOUND'
+        parsed_response.any? && parsed_response['status'] != 'OK'
       end
     end
 

@@ -22,7 +22,33 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rails Integration
+When using rails you can use a generator to create an initializer to configure
+this gem:
+
+```bash
+$ rails generate ratonvirus-resty:install
+```
+
+### How do I configure the API endpoints.
+
+You can set defaults in the generated initializer:
+
+    # config/initializers/ratonvirus-resty.rb
+    GetAgApi.configure do |config|
+      config.service_url = ENV.fetch('RESTY_SERVICE_URL', 'http://localhost:9000/scan')
+      config.username = ENV.fetch('RESTY_USERNAME', nil) # optional
+      config.password = ENV.fetch('RESTY_PASSWORD', nil) # optional
+      config.proxy_url = ENV.fetch('PROXY_URL', nil) # optional
+    end
+
+These value are overridden by following environment variables:
+
+* RESTY_SERVICE_URL
+* RESTY_USERNAME
+* RESTY_PASSWORD
+
+
 
 ## Development
 

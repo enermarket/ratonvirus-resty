@@ -17,7 +17,7 @@ module Ratonvirus
       @result = Result.new
     end
 
-    def installed?
+    def self.installed?
       true
     end
 

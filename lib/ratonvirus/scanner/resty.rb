@@ -1,8 +1,10 @@
 require 'ratonvirus'
+require "ratonvirus/services/antivirus_check_service"
 
 module Ratonvirus
   module Scanner
     class Resty < Ratonvirus::Scanner::Base
+
       class << self
         def executable?
           AntivirusCheckService.installed?
@@ -15,7 +17,7 @@ module Ratonvirus
         if File.file?(path)
           result = AntivirusCheckService.new(path).call
           if result.virus?
-            errors << :antivirus_virus_deteced
+            errors << :antivirus_virus_detected
           end
         else
           errors << :antivirus_file_not_found

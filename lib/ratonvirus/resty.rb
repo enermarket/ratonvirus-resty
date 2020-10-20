@@ -1,17 +1,17 @@
-require "ratonvirus/resty/version"
-require "ratonvirus/resty/configuration"
-require "faraday"
-require "mimemagic"
+require 'faraday'
+require 'mimemagic'
 require 'active_support'
-
-require_relative "scanner/resty"
-require_relative "resty/configuration"
+require 'rails'
+require 'ratonvirus/resty/version'
+require 'ratonvirus/scanner/resty'
+require 'ratonvirus/resty/configuration'
+require 'ratonvirus/services/antivirus_check_service'
+require 'ratonvirus/resty/engine' if defined?("Rails")
 
 module Ratonvirus
-  autoload :AntivirusCheckService, 'ratonvirus/services/antivirus_check_service'
-  
   module Resty
     extend Configuration
+
     class Error < StandardError; end
   end
 end

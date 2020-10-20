@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "ratonvirus"
 require "ratonvirus/resty"
 require 'pry'
 require 'webmock/rspec'
@@ -8,11 +9,16 @@ if ENV['COVERAGE']
   SimpleCov.start
 end
 
+
+require_relative "helpers"
+
 Dir['./spec/support/**/*.rb'].map do |file|
   require file
 end
 
 RSpec.configure do |config|
+  config.include Ratonvirus::Resty::Test::Helpers
+
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
 
@@ -21,5 +27,13 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before do
+    Ratonvirus.reset
+    Ratonvirus.configure do |rv_config|
+      rv_config.storage = :filepath
+      rv_config.addons = []
+    end
   end
 end

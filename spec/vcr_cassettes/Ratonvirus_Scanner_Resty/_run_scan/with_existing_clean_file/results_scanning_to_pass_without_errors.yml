@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9000/scan
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-67a8aec5dbe77e8e8475884753e149bc\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"clean_file.pdf\"\r\nContent-Length: 0\r\nContent-Type:
+        application/pdf\r\nContent-Transfer-Encoding: binary\r\n\r\n\r\n-------------RubyMultipartPost-67a8aec5dbe77e8e8475884753e149bc--\r\n"
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-67a8aec5dbe77e8e8475884753e149bc
+      Content-Length:
+      - '293'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 20 Oct 2020 09:34:46 GMT
+      Content-Length:
+      - '33'
+    body:
+      encoding: UTF-8
+      string: '{ Status: "OK", Description: "" }'
+  recorded_at: Tue, 20 Oct 2020 09:34:46 GMT
+recorded_with: VCR 6.0.0

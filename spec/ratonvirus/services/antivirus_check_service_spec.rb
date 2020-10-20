@@ -1,16 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Ratonvirus::AntivirusCheckService do
+RSpec.describe Ratonvirus::AntivirusCheckService, :vcr do
   describe 'scan' do
-    let(:scan_response) { Ratonvirus::AntivirusCheckService.new('./test.pdf').call }
-
     describe 'antivirus free scan' do
-      before(:each) do
-        stub_request(:post, "http://localhost:9000/scan").
-        to_return(status: 200, body: '{"Status": "OK", "Description": ""}', headers: {})
-      end
-
-      after(:each) { WebMock.reset! }
+      let(:scan_response) { Ratonvirus::AntivirusCheckService.new(ratonvirus_file_fixture('clean_file.pdf')).call }
 
       it 'return false for virus check' do
         expect(scan_response.parsed_response).to be_kind_of(Hash)
@@ -20,12 +13,7 @@ RSpec.describe Ratonvirus::AntivirusCheckService do
     end
 
     describe 'antivirus errorfull scan' do
-      before(:each) do
-        stub_request(:post, "http://localhost:9000/scan").
-        to_return(status: 406, body: '{"Status": "FOUND", "Description": "Eicar-Test-Signature"}', headers: {})
-      end
-
-      after(:each) { WebMock.reset! }
+      let(:scan_response) { Ratonvirus::AntivirusCheckService.new(ratonvirus_file_fixture('infected_file.pdf')).call }
 
       it 'return true for virus check' do
         expect(scan_response.parsed_response).to be_kind_of(Hash)
@@ -35,17 +23,10 @@ RSpec.describe Ratonvirus::AntivirusCheckService do
     end
 
     describe 'antivirus scan without a file' do
-      before(:each) do
-        stub_request(:post, "http://localhost:9000/scan").
-        to_return(status: 501, body: '{"Status": "ERROR", "Description": "Unknown Request"}', headers: {})
-      end
-
-      after(:each) { WebMock.reset! }
+      let(:scan_response) { Ratonvirus::AntivirusCheckService.new('').call }
 
       it 'return true for virus check' do
-        expect(scan_response.parsed_response).to be_kind_of(Hash)
-        expect(scan_response).to respond_to(:virus?)
-        expect(scan_response.virus?).to be_truthy
+        expect(scan_response.parsed_response).to be_nil
       end
     end
   end

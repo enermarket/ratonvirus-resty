@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9000/scan
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-bff03a4fd9d7f580e65f0a4a24254c9e\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"infected_file.pdf\"\r\nContent-Length:
+        68\r\nContent-Type: application/pdf\r\nContent-Transfer-Encoding: binary\r\n\r\nX5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*\r\n-------------RubyMultipartPost-bff03a4fd9d7f580e65f0a4a24254c9e--\r\n"
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-bff03a4fd9d7f580e65f0a4a24254c9e
+      Content-Length:
+      - '365'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 406
+      message: Not Acceptable
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 20 Oct 2020 09:31:46 GMT
+      Content-Length:
+      - '56'
+    body:
+      encoding: UTF-8
+      string: '{ Status: "FOUND", Description: "Win.Test.EICAR_HDB-1" }'
+  recorded_at: Tue, 20 Oct 2020 09:31:46 GMT
+recorded_with: VCR 6.0.0

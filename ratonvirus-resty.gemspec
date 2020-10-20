@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
 
   # Test helper
   spec.add_development_dependency "webmock"
+  spec.add_development_dependency "vcr"
   spec.add_development_dependency 'pry', '~> 0.13.1'
   spec.add_development_dependency "generator_spec"
 

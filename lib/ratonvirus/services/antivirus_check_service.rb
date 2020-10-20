@@ -31,7 +31,10 @@ module Ratonvirus
     def perform_request
       @logger.debug { "Performing request to #{base_url}" }
       begin
-        @response = connection.post(base_url, { file: initialize_upload_file })
+        @response = connection.post(base_url) do |request|
+          request.headers['Content-Type'] = 'multipart/form-data'
+          request.body = { file: initialize_upload_file }
+        end
         @result.parsed_response = parse_response
         unless @response.success?
           @logger.debug { "API request respond with status code #{@response.status}: #{parse_response}"}
@@ -42,8 +45,9 @@ module Ratonvirus
     end
 
     def parse_response
-      @logger.debug { "Parsing response #{@response}"}
-      JSON.parse(@response.body).transform_keys(&:downcase)
+      @logger.debug { "Parsing response #{@response.body}"}
+      string_to_parse = @response.body.gsub("Status","\"Status\"").gsub("Description","\"Description\"")
+      JSON.parse(string_to_parse).transform_keys(&:downcase)
     end
 
     def connection

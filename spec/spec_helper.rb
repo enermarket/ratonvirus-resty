@@ -2,7 +2,7 @@ require "bundler/setup"
 require "ratonvirus"
 require "ratonvirus/resty"
 require 'pry'
-require 'webmock/rspec'
+require 'vcr_setup'
 
 if ENV['COVERAGE']
   require 'simplecov'

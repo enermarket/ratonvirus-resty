@@ -9,7 +9,7 @@ module Ratonvirus
       end
 
       mattr_accessor(:service_url) { ENV.fetch('RESTY_SERVICE_URL', 'http://localhost:9000/scan') }
-      mattr_accessor(:username) { ENV.fetch('RESTY_USER', nil) }
+      mattr_accessor(:username) { ENV.fetch('RESTY_USERNAME', nil) }
       mattr_accessor(:password) { ENV.fetch('RESTY_PASSWORD', nil) }
       mattr_accessor(:proxy_url) { ENV.fetch('PROXY_URL') { nil } }
     end

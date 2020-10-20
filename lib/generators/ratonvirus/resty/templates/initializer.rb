@@ -7,9 +7,9 @@ Ratonvirus::Resty.configure do |config|
 
   # Optional sets the username for api requests
   #
-  # config.username = ENV.fetch('RESTY_USER', nil)
+  # config.username = ENV.fetch('RESTY_USERNAME', nil)
   #
-  config.username = ENV.fetch('RESTY_USER', nil)
+  config.username = ENV.fetch('RESTY_USERNAME', nil)
   # Optional sets the password for api requests
   #
   # config.password = ENV.fetch('RESTY_PASSWORD', nil)

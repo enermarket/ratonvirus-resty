@@ -2,7 +2,6 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ratonvirus/resty`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -48,7 +47,16 @@ These value are overridden by following environment variables:
 * RESTY_USERNAME
 * RESTY_PASSWORD
 
+### Ratonvirus configuration
 
+After you configured ratonviurs-resty. You schould inform your ratonvirus config to use resty. 
+
+Ratonvirus.configure do |config|
+  config.scanner = :resty
+  config.storage = :multi, { storages: [:filepath, :active_storage, :carrierwave] }
+end
+
+Thats is ;)
 
 ## Development
 

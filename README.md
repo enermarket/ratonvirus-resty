@@ -51,10 +51,10 @@ These value are overridden by following environment variables:
 
 After you configured ratonviurs-resty. You schould inform your ratonvirus config to use resty. 
 
-Ratonvirus.configure do |config|
-  config.scanner = :resty
-  config.storage = :multi, { storages: [:filepath, :active_storage, :carrierwave] }
-end
+    Ratonvirus.configure do |config|
+      config.scanner = :resty
+      config.storage = :multi, { storages: [:filepath, :active_storage, :carrierwave] }
+    end
 
 Thats is ;)
 

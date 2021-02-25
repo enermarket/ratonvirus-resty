@@ -56,7 +56,7 @@ After you configured ratonviurs-resty. You schould inform your ratonvirus config
       config.storage = :multi, { storages: [:filepath, :active_storage, :carrierwave] }
     end
 
-Thats is ;)
+Thats it ;)
 
 ## Development
 
